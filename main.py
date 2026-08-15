@@ -126,3 +126,13 @@ User Description: Demo fitting of noisy quadratic curve.
         "logs": search_res["logs"]
     }
     return sanitize_json(response_data)
+
+@app.post("/api/wolfram")
+def run_wolfram_query(query: str = Form(...)):
+    """
+    Runs a query directly to Wolfram Alpha Spoken Results API.
+    """
+    from engine.executor import query_wolfram_alpha
+    result = query_wolfram_alpha(query)
+    return {"result": result}
+

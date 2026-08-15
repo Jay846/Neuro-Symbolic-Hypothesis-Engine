@@ -104,6 +104,45 @@ document.addEventListener("DOMContentLoaded", () => {
         const consoleEl = document.getElementById("log-console");
         consoleEl.innerHTML = '<div class="terminal-line system-msg">Console logs cleared. Ready...</div>';
     });
+    
+    // Wolfram terminal query integration
+    async function sendTerminalQuery() {
+        const inputEl = document.getElementById("terminal-input");
+        const query = inputEl.value.trim();
+        if (!query) return;
+        
+        addLog(`Querying Wolfram: "${query}"`, "info");
+        inputEl.value = "";
+        
+        try {
+            const formData = new FormData();
+            formData.append("query", query);
+            
+            const response = await fetch("/api/wolfram", {
+                method: "POST",
+                body: formData
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            addLog(`Wolfram Result: ${data.result}`, "success");
+        } catch (error) {
+            addLog(`Wolfram Error: ${error.message}`, "error");
+        }
+    }
+    
+    const btnSend = document.getElementById("btn-terminal-send");
+    const inputEl = document.getElementById("terminal-input");
+    
+    btnSend.addEventListener("click", sendTerminalQuery);
+    inputEl.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            sendTerminalQuery();
+        }
+    });
 });
 
 function initChart() {

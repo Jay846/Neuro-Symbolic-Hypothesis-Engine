@@ -446,3 +446,43 @@ tr:hover td {
 .success-msg {
     color: var(--accent-green);
 }
+
+.terminal-footer {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#terminal-input {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+
+#terminal-input:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+}
+
+#btn-terminal-send {
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    color: var(--accent-cyan);
+    border-radius: 8px;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btn-terminal-send:hover {
+    background: var(--accent-cyan);
+    color: #000;
+}
