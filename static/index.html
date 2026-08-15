@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro-Symbolic Hypothesis Engine</title>
+    
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-gradients">
+        <div class="gradient-ball ball-1"></div>
+        <div class="gradient-ball ball-2"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-card header-card">
+            <div class="logo-area">
+                <i class="fa-solid fa-brain-circuit glow-icon"></i>
+                <div>
+                    <h1>Neuro-Symbolic Hypothesis Engine</h1>
+                    <p class="tagline">Automated scientific discovery via LLM reasoning & Wolfram / SymPy symbolic optimization</p>
+                </div>
+            </div>
+            <div class="badge">Reverie Hacks DevOps 2026</div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Panel: Upload & Run Parameters -->
+            <section class="glass-card panel-controls">
+                <h2><i class="fa-solid fa-sliders"></i> Control Panel</h2>
+                
+                <form id="analyze-form">
+                    <div class="form-group">
+                        <label for="csv-file">Upload Dataset (CSV)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="csv-file" accept=".csv" required>
+                            <label for="csv-file" class="file-label">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Choose CSV file...</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="domain-context">Domain Context</label>
+                        <input type="text" id="domain-context" placeholder="e.g. Astrophysics, Finance, Quantum Mechanics">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data-description">Data / Target Description</label>
+                        <textarea id="data-description" rows="3" placeholder="Describe what the Y target variable represents..."></textarea>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary" id="btn-run">
+                            <i class="fa-solid fa-play"></i> Run Discovery
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="btn-demo">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Demo Run
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Middle Panel: Visualization Chart -->
+            <section class="glass-card panel-visualization">
+                <h2><i class="fa-solid fa-chart-line"></i> Interactive Curve Fit</h2>
+                <div class="chart-container">
+                    <canvas id="fit-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Lower Left: Leaderboard -->
+            <section class="glass-card panel-leaderboard">
+                <h2><i class="fa-solid fa-ranking-star"></i> Equation Leaderboard</h2>
+                <div class="table-wrapper">
+                    <table id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Hypothesis Equation</th>
+                                <th>R² Score</th>
+                                <th>AIC</th>
+                                <th>Plot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="empty-state">No models discovered yet. Upload a dataset or run the demo!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Lower Right: Execution Logs & Terminal -->
+            <section class="glass-card panel-terminal">
+                <div class="terminal-header">
+                    <h2><i class="fa-solid fa-terminal"></i> Agent Execution & Self-Healing Log</h2>
+                    <button class="btn-clear" id="btn-clear-logs"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+                <div class="terminal-body" id="log-console">
+                    <div class="terminal-line system-msg">System initialized. Ready for research task...</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script File -->
+    <script src="/static/app.js?v=1.0.2"></script>
+</body>
+</html>

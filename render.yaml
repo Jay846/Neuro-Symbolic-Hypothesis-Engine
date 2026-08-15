@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: reverie-hypothesis-engine
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: FEATHERLESS_API_KEY
+        value: rc_33ac9a53b845eeb21d5542378f2cd956c473b30169977600fccfa3a980c2b6bd
+      - key: WOLFRAM_APP_ID
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.6
