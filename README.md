@@ -84,6 +84,14 @@ The engine has been rigorously tested locally across multiple physical and scien
 * **Engine Discovered Equation**: $y(x) = \tanh(a \cdot x)$ (where $a \to \infty$)
 * **Performance**: $R^2 = 1.0000$ (discovers a smooth, differentiable approximation of step functions).
 
+### 4. GPU Shader Math Optimization (Skin Sub-Surface Scattering)
+* **Observed Data**: Transmittance light intensity decaying exponentially and geometrically: $Y = \frac{e^{-1.5x}}{x^2 + 0.8}$. Transcendentals and division are slow on GPU hardware.
+* **Engine Discovered Equation**: $Y = (((0.03526 \cdot x - 0.36384) \cdot x + 1.35304) \cdot x - 2.15211) \cdot x + 1.25$ (using Horner's method)
+* **Performance & Optimization**:
+  - **Zero division operations** (avoiding slow reciprocal lookups on GPU Special Function Units).
+  - **Only 4 hardware clock cycles** using Fused Multiply-Add (FMA/MAD) instructions.
+  - **99.8% Accuracy**: $R^2 = 0.998067$ with the surface intercept anchored exactly at $1.25$ when $x=0.0$.
+
 ---
 
 ## 🔒 Safety & Resilience Features
