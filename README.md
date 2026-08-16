@@ -114,7 +114,7 @@ pip install -r requirements.txt
 Configure your environment variables or update `config.py`:
 ```bash
 export FEATHERLESS_API_KEY="your-featherless-key"
-export FIRECRAWL_API_KEY="fc-edd3db0c3f3849d099eca9ddc77248e8"
+export FIRECRAWL_API_KEY="your_api_key"
 ```
 
 ### 3. Run the Server
