@@ -1,6 +1,5 @@
 # 🌌 Neuro-Symbolic Hypothesis & Symbolic Regression Engine
 > **An autonomous quantitative discovery agent that extracts governing mathematical laws from raw empirical datasets.**
-> *Developed for the Reverie Hacks DevOps & AI Hackathon 2026*
 
 ---
 
