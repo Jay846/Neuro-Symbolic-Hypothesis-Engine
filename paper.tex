@@ -1,0 +1,115 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{
+    colorlinks=true,         % Colors the text instead of drawing a box
+    linkcolor=black,         % Keeps table/equation links professional black
+    urlcolor=blue            % Makes  GitHub link a clean, sharp blue
+}
+
+
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+
+\title{Neuro-Symbolic Hypothesis Engine: Autonomous Scientific Discovery via Hybrid Large Language Models and Symbolic Regression}
+
+\author{Jay~Salvi%
+\thanks{Manuscript received August 18, 2026. J. Salvi is an Independent Researcher, Anand, India (e-mail: jay85salvi@gmail.com).}}
+\maketitle
+
+\begin{abstract}
+Extracting governing mathematical laws directly from raw empirical datasets is a fundamental challenge in scientific computing and artificial intelligence. Classical symbolic regression methods suffer from combinatorial search spaces, while pure deep learning approaches lack mathematical interpretability. In this paper, we introduce the Neuro-Symbolic Hypothesis Engine, an autonomous quantitative discovery agent that combines the high-level semantic reasoning of Large Language Models (LLMs) with the speed of deterministic numerical solvers and localized evolutionary search. By leveraging a 6-stage hybrid pipeline—incorporating automated domain literature retrieval, whitelisted Abstract Syntax Tree (AST) safety gating, SciPy non-linear optimization, and local expression tree mutations—the engine discovers robust mathematical formulations across astro-physics, digital signals, and computer graphics. We validate the engine on four real-world scientific datasets, achieving $R^2 > 0.977$ in all cases while maintaining computational safety and efficiency.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Neuro-Symbolic AI, Scientific Discovery, Symbolic Regression, Large Language Models, Optimization.
+\end{IEEEkeywords}
+
+\section{Introduction}
+\IEEEPARstart{T}{he} traditional scientific method relies on human experts formulating hypotheses, designing models, and fitting parameters to empirical data. Recently, automated scientific discovery has emerged as a promising field to accelerate this process. Classical techniques like symbolic regression (e.g., genetic programming) can find mathematical equations from data, but they struggle with scale due to the exponential search space of algebraic combinations.
+
+The Neuro-Symbolic Hypothesis Engine addresses this by combining neural reasoning with symbolic mathematical execution. We use a Large Language Model (Qwen2.5-Coder-32B-Instruct) as a creative "generator" of seed equations based on domain-specific literature scraped dynamically. We then employ deterministic numerical engines (SymPy and SciPy) to perform safety checking, algebraic simplification, and parameter fitting. Finally, a local expression tree mutation algorithm optimizes the algebraic structure without needing repetitive LLM queries.
+
+\section{Core Architecture}
+The engine is structured as a 6-stage autonomous pipeline:
+\begin{enumerate}
+    \item \textbf{Domain Scraping:} Upon dataset upload, the system utilizes the Firecrawl Search API to scrape scientific literature (arXiv and Google Scholar) for existing governing equations matching the user-provided context.
+    \item \textbf{Candidate Generation:} An LLM uses the scraped mathematical expressions as prior context to generate five candidates for seed equations, incorporating relevant physical constants or structures.
+    \item \textbf{AST Safety Sandbox:} To prevent malicious code execution, candidate strings are parsed into Abstract Syntax Trees (AST) using SymPy, validating them against a strict whitelist of mathematical operators (e.g., $\text{Add}, \text{Sub}, \text{Mul}, \text{Div}, \text{Pow}, \sin, \cos$) and blocking Python built-ins like \texttt{\_\_import\_\_} and \texttt{eval}.
+    \item \textbf{Parameter Optimization:} Whitelisted expressions are converted to executable functions. SciPy's \texttt{curve\_fit} (non-linear least squares) optimizes parameter coefficients, computing goodness-of-fit metrics ($R^2$, AIC, and BIC).
+    \item \textbf{Local Tree Mutations:} The best-performing seed equation is converted to a mutable expression tree. Operators, subtrees, and constants are locally mutated and re-optimized. This local refinement bypasses LLM inference, reducing API latency.
+    \item \textbf{Dynamic Dashboard:} Results are served on a glassmorphic web dashboard, rendering regression leaderboards and interactive Chart.js plots comparing raw data points to the discovered fit curves.
+\end{enumerate}
+
+\section{Experimental Evaluation}
+We evaluated the Neuro-Symbolic Hypothesis Engine across four physical and engineering domains. The experimental results are summarized in Table~\ref{tab:results}.
+
+\begin{table}[h]
+\centering
+\caption{Discovery Performance across Benchmark Domains}
+\label{tab:results}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Domain} & \textbf{Discovered Equation} & \textbf{$R^2$} & \textbf{Metric/Efficiency} \\
+\midrule
+Galactic Rotation Curves & $v(r) = a \cdot \ln(b \cdot r + c)$ & $0.9777$ & Flat asymptotic velocity \\
+Damped Harmonic Oscillator & $v(t) = A \cdot e^{-\lambda \cdot t} \cdot \sin(\omega \cdot t + \phi)$ & $0.9966$ & $\text{AIC} = -477.23$ \\
+Piecewise Step Function & $y(x) = \tanh(a \cdot x)$ & $1.0000$ & Smooth approximation \\
+GPU Sub-Surface Scattering & $Y = (((a x + b) x + c) x + d) x + 1.25$ & $0.9981$ & 4 cycles (Horner's, 0 division) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Key Findings}
+\begin{itemize}
+    \item \textbf{Galactic Velocity Curves:} The engine successfully captured the non-linear, flat asymptotic behavior characteristic of outer stellar orbits under modified Newtonian dynamics (MOND).
+    \item \textbf{Damped Oscillator:} Discovered the exact physical formulation from noisy, decay-modulated periodic data.
+    \item \textbf{GPU Shader Optimization:} For skin sub-surface scattering, the engine approximated the expensive transcendental transmittance function:
+    \begin{equation}
+        Y = \frac{e^{-1.5x}}{x^2 + 0.8}
+    \end{equation}
+    with a Horner-form polynomial:
+    \begin{equation}
+        Y_{poly} = (((0.03526 x - 0.36384) x + 1.35304) x - 2.15211) x + 1.25
+    \end{equation}
+    This formulation guarantees zero division operations, reducing GPU clock cycle overhead to just 4 Fused Multiply-Add (FMA) cycles.
+\end{itemize}
+
+\section{Safety and Deployment}
+The pipeline is designed for secure, cloud-native execution:
+\begin{itemize}
+    \item \textbf{Sanitization:} Optimization failures yielding NaN or infinite floats are automatically intercepted and serialized to JSON nulls to prevent dashboard rendering crashes.
+    \item \textbf{Deployment:} Out-of-the-box support for Render via \texttt{render.yaml} blueprints running Python 3.11.6 and Uvicorn on \href{https://github.com/Jay846/Neuro-Symbolic-Hypothesis-Engine}{GitHub}.
+\end{itemize}
+
+\section{Conclusion}
+The Neuro-Symbolic Hypothesis Engine demonstrates that coupling large language models with numerical verification engines is a highly effective paradigm for automated scientific discovery. By constraining neural generation using symbolic AST guards and refining formulas through local tree mutations, the system balances creativity, mathematical precision, and absolute safety. Future work will expand the local tree mutation rules to support multivariate piecewise boundaries.
+
+\end{document}
